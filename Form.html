@@ -1,36 +1,352 @@
-<!--  ----------------------------------------------------------------------  -->
-<!--  次の <META> 要素を、HTML の <HEAD>タグ間に追加してください。必要に応じて、charset                  -->
-<!--  パラメーターを変更して、HTML ページの文字コードを指定してください。                                    -->
-<!--  ----------------------------------------------------------------------  -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <title>お問い合わせ - コラ画像研究所</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-<!--  ----------------------------------------------------------------------  -->
-<!--  次の <FORM> 要素をページに追加してください。                                              -->
-<!--  ----------------------------------------------------------------------  -->
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000007bH9A" method="POST">
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+        }
 
-<input type=hidden name="orgid" value="00DgK000007bH9A">
-<input type=hidden name="retURL" value="https://mr-44-bs.github.io/collage-research-institute/">
+        .form-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-<!--  ----------------------------------------------------------------------  -->
-<!--  注意: これらの項目は、省略可能なデバッグ用要素です。デバッグモードでテストを行う場合は、これらの行をコメント解除してください。        -->
-<!--  <input type="hidden" name="debug" value=1>                              -->
-<!--  <input type="hidden" name="debugEmail"                                  -->
-<!--  value="yamashita_yoko@comture.com">                                     -->
-<!--  ----------------------------------------------------------------------  -->
+        .form-header p {
+            color: #555;
+            font-size: 1.1rem;
+        }
 
-お客様氏名:<input  id="00NgK000018esW1" maxlength="255" name="00NgK000018esW1" size="20" type="text" /><br>
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 3rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
 
-<label for="subject">件名</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
 
-<label for="description">説明</label><textarea name="description"></textarea><br>
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
 
-<label for="phone">電話</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+        .form-group label::after {
+            content: " *";
+            color: #e74c3c;
+            font-weight: bold;
+        }
 
-<input type="hidden"  id="external" name="external" value="1" /><br>
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
 
-<input type="submit" name="submit">
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
 
-</form>
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input[type="text"]::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-info {
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 4px solid #4ecdc4;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .form-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-info p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .required-note {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .form-header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-group input[type="text"],
+            .form-group textarea {
+                padding: 12px 15px;
+            }
+
+            .submit-btn {
+                padding: 15px 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* アニメーション効果 */
+        .form-group {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-form {
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>📧 お問い合わせ</h1>
+            <p>コラ画像研究所へのご質問・ご相談は、こちらのフォームからお送りください</p>
+        </div>
+
+        <div class="contact-form">
+            <div class="form-info">
+                <h3>📋 お問い合わせについて</h3>
+                <p>研究内容、技術相談、共同研究のご提案など、お気軽にお問い合わせください。通常2-3営業日以内にご返信いたします。</p>
+            </div>
+
+            <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000007bH9A" method="POST">
+                <input type="hidden" name="orgid" value="00DgK000007bH9A">
+                <input type="hidden" name="retURL" value="https://mr-44-bs.github.io/collage-research-institute/">
+                <input type="hidden" id="external" name="external" value="1">
+
+                <p class="required-note">* は必須項目です</p>
+
+                <div class="form-group">
+                    <label for="00NgK000018esW1">お客様氏名</label>
+                    <input 
+                        id="00NgK000018esW1" 
+                        maxlength="255" 
+                        name="00NgK000018esW1" 
+                        type="text" 
+                        placeholder="山田 太郎"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">電話番号</label>
+                    <input 
+                        id="phone" 
+                        maxlength="40" 
+                        name="phone" 
+                        type="text" 
+                        placeholder="03-1234-5678"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">件名</label>
+                    <input 
+                        id="subject" 
+                        maxlength="80" 
+                        name="subject" 
+                        type="text" 
+                        placeholder="研究内容について"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="description">お問い合わせ内容</label>
+                    <textarea 
+                        id="description"
+                        name="description" 
+                        placeholder="お問い合わせの詳細をご記入ください。&#10;&#10;例：&#10;・研究内容について詳しく知りたい&#10;・共同研究の可能性について相談したい&#10;・技術的な質問がある"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn" name="submit">
+                        🚀 送信する
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // フォームバリデーション
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const requiredFields = ['00NgK000018esW1', 'subject', 'description'];
+            let isValid = true;
+            
+            requiredFields.forEach(fieldName => {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e74c3c';
+                    field.style.boxShadow = '0 0 10px rgba(231, 76, 60, 0.3)';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#4ecdc4';
+                    field.style.boxShadow = '0 0 10px rgba(78, 205, 196, 0.3)';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('必須項目をすべて入力してください。');
+            }
+        });
+
+        // 入力時のリアルタイムバリデーション
+        document.querySelectorAll('input[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    this.style.borderColor = '#4ecdc4';
+                    this.style.boxShadow = '0 0 10px rgba(78, 205, 196, 0.2)';
+                } else {
+                    this.style.borderColor = '#e74c3c';
+                    this.style.boxShadow = '0 0 10px rgba(231, 76, 60, 0.2)';
+                }
+            });
+        });
+
+        // 送信前の確認
+        document.querySelector('.submit-btn').addEventListener('click', function(e) {
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+            
+            // 簡易確認ダイアログ
+            setTimeout(() => {
+                if (confirm('入力内容を確認して、送信してよろしいですか？')) {
+                    this.textContent = '送信中...';
+                    this.disabled = true;
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
