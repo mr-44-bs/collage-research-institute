@@ -415,7 +415,69 @@
     </script>
  
      <!-- ▼ Salesforce Embedded Messaging 組み込みコード ▼ -->
- <script type='text/javascript'>
+	<style type='text/css'>
+  .embeddedServiceHelpButton .helpButton .uiButton {
+    background-color: #005290;
+    font-family: "Arial", sans-serif;
+  }
+  .embeddedServiceHelpButton .helpButton .uiButton:focus {
+    outline: 1px solid #005290;
+  }
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+  var initESW = function(gslbBaseURL) {
+    embedded_svc.settings.displayHelpButton = true; //または false
+    embedded_svc.settings.language = ''; //たとえば、「en」または「en-US」を入力します
+
+    //embedded_svc.settings.defaultMinimizedText = '...'; //(エキスパートとチャットにデフォルト設定)
+    //embedded_svc.settings.disabledMinimizedText = '...'; //(エージェントがオフラインにデフォルト設定)
+
+    //embedded_svc.settings.loadingText = ''; //(読み込み中にデフォルト設定)
+    //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(リリースのドメインを設定して、訪問者がチャットセッション中にサブドメインを移動できるようにします)
+
+    // チャット の設定
+    //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+      // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+      // Returns a valid button ID.
+    //};
+    //embedded_svc.settings.prepopulatedPrechatFields = {}; //事前チャットフォームの項目の自動入力を設定
+    //embedded_svc.settings.fallbackRouting = []; //ボタン ID、ユーザー ID、または userId_buttonId の配列
+    //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(デフォルトは [お問い合わせ])
+
+    embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+    embedded_svc.settings.entryFeature = 'LiveAgent';
+
+    embedded_svc.init(
+      'https://orgfarm-c8abdd2c75-dev-ed.develop.my.salesforce.com',
+      'https://orgfarm-c8abdd2c75-dev-ed.develop.my.site.com/',
+      gslbBaseURL,
+      '00DgK000007bH9A',
+      'Chat_team',
+      {
+        baseLiveAgentContentURL: 'https://c.la11-core1.sfdc-58ktaz.salesforceliveagent.com/content',
+        deploymentId: '572gK000004769d',
+        buttonId: '573gK000001GZCX',
+        baseLiveAgentURL: 'https://d.la11-core1.sfdc-58ktaz.salesforceliveagent.com/chat',
+        eswLiveAgentDevName: 'Chat_team',
+        isOfflineSupportEnabled: true
+      }
+    );
+  };
+
+  if (!window.embedded_svc) {
+    var s = document.createElement('script');
+    s.setAttribute('src', 'https://orgfarm-c8abdd2c75-dev-ed.develop.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+    s.onload = function() {
+      initESW(null);
+    };
+    document.body.appendChild(s);
+  } else {
+    initESW('https://service.force.com');
+  }
+</script>s
+<!--  <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
@@ -433,7 +495,7 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://orgfarm-c8abdd2c75-dev-ed.develop.my.site.com/ESWEmbeddedMessaging21753923955823/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://orgfarm-c8abdd2c75-dev-ed.develop.my.site.com/ESWEmbeddedMessaging21753923955823/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script> -->
  
     <!-- ▲ Salesforce Embedded Messaging 組み込みコードここまで ▲ -->
 </body>
