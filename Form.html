@@ -58,6 +58,54 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
+        .attachment-info {
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 4px solid #4ecdc4;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .attachment-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .attachment-info p {
+            margin: 0 0 15px 0;
+            color: #555;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .email-address {
+            background: white;
+            color: #2c3e50;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            word-break: break-all;
+            border: 2px solid #e9ecef;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .email-address:hover {
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+
         .form-group {
             margin-bottom: 1.8rem;
         }
@@ -180,6 +228,8 @@
                 padding: 2rem 1.5rem;
             }
 
+            
+
             .form-group input[type="text"],
             .form-group textarea {
                 padding: 12px 15px;
@@ -234,6 +284,16 @@
             <div class="form-info">
                 <h3>📋 お問い合わせについて</h3>
                 <p>研究内容、技術相談、共同研究のご提案など、お気軽にお問い合わせください。通常2-3営業日以内にご返信いたします。</p>
+            </div>
+
+            <div class="attachment-info">
+                <h4>📎 添付ファイルについて</h4>
+                <p>添付ファイルがある場合は、こちらのメールアドレスから資料を添付のうえお問い合わせをお願いします：</p>
+                <div class="email-address" id="emailAddress" onclick="copyEmail()">
+                    yokouq0805@b-k48cl46h8x5j79quh660920vkqu2eigq12gc5mprey9nidylt.gk-7bh9auau.can96.case.salesforce.com
+                    <button class="copy-btn" onclick="copyEmail(event)">📋 コピー</button>
+                </div>
+                <p style="font-size: 0.9em; margin-top: 15px;">※ 画像ファイル、PDFファイル、Wordファイルなどの資料を添付可能です</p>
             </div>
 
             <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000007bH9A" method="POST">
