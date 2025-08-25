@@ -358,6 +358,62 @@
     </div>
 
     <script>
+        // メールアドレスをコピーする機能
+        function copyEmail(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const email = "yokouq0805@b-k48cl46h8x5j79quh660920vkqu2eigq12gc5mprey9nidylt.gk-7bh9auau.can96.case.salesforce.com";
+            
+            // クリップボードAPIを使用
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(email).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(email);
+                });
+            } else {
+                fallbackCopyTextToClipboard(email);
+            }
+        }
+
+        // フォールバック用のコピー機能
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.top = "-1000px";
+            textArea.style.left = "-1000px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess();
+            } catch (err) {
+                alert('コピーに失敗しました。手動でメールアドレスを選択してコピーしてください。');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // コピー成功時の表示
+        function showCopySuccess() {
+            const copyBtn = document.querySelector('.copy-btn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '✅ コピー完了';
+            copyBtn.style.background = '#27ae60';
+            
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.background = '#4ecdc4';
+            }, 2000);
+        }
+    </script>
+
+    <script>
         // フォームバリデーション
         document.querySelector('form').addEventListener('submit', function(e) {
             const requiredFields = ['00NgK000018esW1', 'subject', 'description'];
